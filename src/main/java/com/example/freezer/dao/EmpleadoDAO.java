@@ -8,9 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmpleadoDAO extends JpaRepository<Empleado,Long> {
 
     List<Empleado> findEmpleadosByOrganizacion(Organizacion organizacion);
+
+    Empleado findEmpleadoByEmail(String email);
+
 }

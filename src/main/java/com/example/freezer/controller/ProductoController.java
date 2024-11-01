@@ -18,18 +18,12 @@ public class ProductoController {
     ProductoService productoService;
 
     @GetMapping("/productos/{prodID}")
-    public List<RegistroTemperatura> getRegistrosTemperaturaById(@PathVariable Long prodID){
+    public ResponseEntity<List<RegistroTemperatura>> getRegistrosTemperaturaById(@PathVariable Long prodID) {
         List<RegistroTemperatura> registros = productoService.getHistorialByProducto(prodID);
-        for(RegistroTemperatura registroTemperatura : registros){
-            System.out.println(registroTemperatura.getEmpleado().getId());
+        if (registros.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-        return productoService.getHistorialByProducto(prodID);
-    }
 
-    @GetMapping("/{productoId}/estado")
-    public ResponseEntity<String> getEstadoProducto(@PathVariable Long productoId) {
-        double promedioTemp = productoService.obtenerPromedioTemperatura(productoId);
-        String estado = promedioTemp <= 3.0 ? "Aprobado" : "Desaprobado";
-        return ResponseEntity.ok(estado);
+        return ResponseEntity.ok(registros);
     }
 }

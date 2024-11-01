@@ -25,9 +25,4 @@ public class ProductoService {
 
         return registroTemperaturaDAO.findRegistroTemperaturasByProductoOrderByFechaHora(productoBuscado.get());
     }
-
-    public double obtenerPromedioTemperatura(Long productoId) {
-        // Simula el cálculo del promedio desde la base de datos
-        return 2.8; // Ejemplo de valor, reemplazar con la lógica de cálculo real
-    }
 }
