@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProductoDAO extends JpaRepository<Producto,Long> {
 
     List<Producto> findProductosByGrupoProducto(GrupoProducto grupoProducto);
+
 }

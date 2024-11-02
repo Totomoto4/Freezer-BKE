@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "grupo_producto")
 @ToString
 public class GrupoProducto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

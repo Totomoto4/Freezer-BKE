@@ -18,7 +18,7 @@ public class EmpleadosController {
     @Autowired
     private EmpleadoService empleadoService;
 
-    @GetMapping("/auth")
+    @PostMapping("/auth")
     public ResponseEntity<EmpleadoDTO> login(@RequestBody LoginRequest loginRequest) throws AuthenticationException {
         EmpleadoDTO authUser = empleadoService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
 

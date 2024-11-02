@@ -3,6 +3,7 @@ package com.example.freezer.controller;
 import java.util.List;
 
 import com.example.freezer.dto.CargaTemperaturaRequest;
+import com.example.freezer.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,16 @@ public class ProductoController {
         return ResponseEntity.ok(registros);
     }
 
+
+    @GetMapping("/organizacion/{orgID}")
+    public ResponseEntity<List<Producto>> getProductosByOrganizacion (@PathVariable Long orgID) {
+        List<Producto> productos = productoService.getProductosByOrganizacion(orgID);
+        if (productos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(productos);
+    }
 
     @PostMapping("/temperatura")
     public ResponseEntity<String> cargarTemperaturas(@RequestBody CargaTemperaturaRequest cargaTemperaturaRequest){
