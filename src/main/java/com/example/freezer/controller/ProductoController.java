@@ -38,6 +38,16 @@ public class ProductoController {
         return ResponseEntity.ok(productos);
     }
 
+    @GetMapping("/organizacion/temperatura/{orgID}")
+    public ResponseEntity<List<RegistroTemperatura>> getRegistrosByOrganizacion (@PathVariable Long orgID) {
+        List<RegistroTemperatura> registros  = productoService.getRegistrosByOrganizacion(orgID);
+        if (registros.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(registros);
+    }
+
     @PostMapping("/temperatura")
     public ResponseEntity<String> cargarTemperaturas(@RequestBody CargaTemperaturaRequest cargaTemperaturaRequest){
 

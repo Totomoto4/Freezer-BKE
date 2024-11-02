@@ -25,6 +25,7 @@ public class Locacion {
     private String nombre;
     private String direccion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "locacion", cascade = CascadeType.ALL)
     private List<GrupoProducto> gruposProducto;
 }

@@ -58,6 +58,9 @@ public class ProductoService {
             productosDeLaOrganizacion.addAll(productoDAO.findProductosByGrupoProducto(grupo));
         }
 
+        for (Producto producto : productosDeLaOrganizacion){
+            System.out.println(producto.getGrupoProducto().toString());
+        }
         return productosDeLaOrganizacion;
     }
 
@@ -85,5 +88,16 @@ public class ProductoService {
         return true;
     }
 
+    public List<RegistroTemperatura> getRegistrosByOrganizacion(Long orgID) {
+
+        List<Producto> productos = this.getProductosByOrganizacion(orgID);
+
+        List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
+        for (Producto producto : productos){
+            registroTemperaturas.addAll(registroTemperaturaDAO.findRegistroTemperaturasByProductoOrderByFechaHora(producto));
+        }
+
+        return registroTemperaturas;
+    }
 }
 
