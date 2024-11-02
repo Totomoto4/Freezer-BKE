@@ -1,6 +1,7 @@
 package com.example.freezer.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.freezer.dto.CargaTemperaturaRequest;
 import com.example.freezer.dto.ProductoRequest;
@@ -63,4 +64,26 @@ public class ProductoController {
 
         return ResponseEntity.ok(producto);
     }
+
+    @DeleteMapping("/producto/{id}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
+        boolean eliminado = productoService.eliminarProducto(id);
+
+        if (eliminado) {
+            return ResponseEntity.noContent().build(); // 204 No Content si se elimina exitosamente
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found si el producto no existe
+        }
+    }
+
+    @PutMapping("/producto/{id}")
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody ProductoRequest productoRequest) {
+        Optional<Producto> productoActualizado = productoService.actualizarProducto(id, productoRequest);
+
+        return productoActualizado
+                .map(ResponseEntity::ok) // 200 OK con el producto actualizado
+                .orElseGet(() -> ResponseEntity.notFound().build()); // 404 Not Found si el producto no existe
+    }
+
+
 }

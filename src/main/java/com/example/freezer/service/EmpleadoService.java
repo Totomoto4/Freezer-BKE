@@ -78,4 +78,31 @@ public class EmpleadoService {
                 .map(EmpleadoDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public boolean eliminarEmpleado(Long id) {
+        Optional<Empleado> empleado = empleadoDAO.findById(id);
+
+        if (empleado.isPresent()) {
+            empleadoDAO.delete(empleado.get());
+            return true;
+        }
+        return false;
+    }
+
+    public Optional<EmpleadoDTO> editarEmpleado(Long id, EmpleadoDTO empleadoDTO) {
+        Optional<Empleado> empleadoExistente = empleadoDAO.findById(id);
+
+        if (empleadoExistente.isPresent()) {
+            Empleado empleado = empleadoExistente.get();
+            empleado.setNombre(empleadoDTO.getNombre());
+            empleado.setApellido(empleadoDTO.getApellido());
+            empleado.setEmail(empleadoDTO.getEmail());
+            empleado.setTipo(empleadoDTO.getTipo());
+
+            empleadoDAO.save(empleado);
+            return Optional.of(empleadoDTO);
+        }
+
+        return Optional.empty();
+    }
 }

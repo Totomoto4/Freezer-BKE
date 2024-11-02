@@ -116,5 +116,31 @@ public class ProductoService {
 
         return productoNuevo;
     }
+
+    public boolean eliminarProducto(Long id) {
+        Optional<Producto> producto = productoDAO.findById(id);
+
+        if (producto.isPresent()) {
+            productoDAO.delete(producto.get());
+            return true;
+        }
+        return false;
+    }
+
+    public Optional<Producto> actualizarProducto(Long id, ProductoRequest productoRequest) {
+        Optional<Producto> productoExistente = productoDAO.findById(id);
+        Optional<GrupoProducto> grupoProductoBuscado = grupoProductoDAO.findById(productoRequest.getGrupoID());
+
+        if (productoExistente.isPresent() && grupoProductoBuscado.isPresent()) {
+            Producto producto = productoExistente.get();
+            producto.setNombre(productoRequest.getNombre());
+            producto.setGrupoProducto(grupoProductoBuscado.get());
+
+            productoDAO.save(producto);
+            return Optional.of(producto);
+        }
+
+        return Optional.empty();
+    }
 }
 

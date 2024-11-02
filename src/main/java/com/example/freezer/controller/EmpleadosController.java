@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EmpleadosController {
@@ -37,5 +38,25 @@ public class EmpleadosController {
         List<EmpleadoDTO> empleadoDTOList = empleadoService.getEmpleadosByOrganizacion(orgID);
 
         return ResponseEntity.ok(empleadoDTOList);
+    }
+
+    @DeleteMapping("/empleado/{id}")
+    public ResponseEntity<Void> eliminarEmpleado(@PathVariable Long id) {
+        boolean eliminado = empleadoService.eliminarEmpleado(id);
+
+        if (eliminado) {
+            return ResponseEntity.noContent().build(); // 204 No Content si se elimina exitosamente
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found si el empleado no existe
+        }
+    }
+
+    @PutMapping("/empleado/{id}")
+    public ResponseEntity<EmpleadoDTO> editarEmpleado(@PathVariable Long id, @RequestBody EmpleadoDTO empleadoDTO) {
+        Optional<EmpleadoDTO> empleadoActualizado = empleadoService.editarEmpleado(id, empleadoDTO);
+
+        return empleadoActualizado
+                .map(ResponseEntity::ok) // 200 OK con el empleado actualizado
+                .orElseGet(() -> ResponseEntity.notFound().build()); // 404 Not Found si el empleado no existe
     }
 }
