@@ -25,5 +25,5 @@ public class RegistroTemperatura {
     private Empleado empleado;
 
     private LocalDateTime fechaHora;
-    private BigDecimal temperatura;
+    private float temperatura;
 }

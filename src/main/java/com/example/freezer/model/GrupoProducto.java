@@ -1,10 +1,13 @@
 package com.example.freezer.model;
 
 import jakarta.persistence.*;
+import lombok.ToString;
+
 import java.util.List;
 
 @Entity
 @Table(name = "grupo_producto")
+@ToString
 public class GrupoProducto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
