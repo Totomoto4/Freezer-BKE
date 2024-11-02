@@ -1,5 +1,6 @@
 com\example\freezer\config\AppConfig.class
 com\example\freezer\model\Producto.class
+com\example\freezer\dto\ProductoRequest.class
 com\example\freezer\dto\RegisterRequest.class
 com\example\freezer\controller\GlobalExceptionHandler.class
 com\example\freezer\dto\EmpleadoDTO.class
@@ -11,6 +12,7 @@ com\example\freezer\dao\GrupoProductoDAO.class
 com\example\freezer\service\QRservice.class
 com\example\freezer\FreezerApplication.class
 com\example\freezer\dao\EmpleadoDAO.class
+com\example\freezer\dto\CargaTemperaturaRequest.class
 com\example\freezer\exception\RegisterException.class
 com\example\freezer\exception\AuthenticationException.class
 com\example\freezer\dao\RegistroTemperaturaDAO.class

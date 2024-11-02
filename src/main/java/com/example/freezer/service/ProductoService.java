@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.example.freezer.dao.*;
 import com.example.freezer.dto.CargaTemperaturaRequest;
+import com.example.freezer.dto.ProductoRequest;
 import com.example.freezer.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,22 @@ public class ProductoService {
         }
 
         return registroTemperaturas;
+    }
+
+    public Producto cargarProducto(ProductoRequest productoRequest) {
+        Optional<GrupoProducto> grupoProducto = grupoProductoDAO.findById(productoRequest.getGrupoID());
+
+        if (grupoProducto.isEmpty()){
+            throw new RuntimeException();
+        }
+
+        Producto productoNuevo = new Producto();
+        productoNuevo.setNombre(productoRequest.getNombre());
+        productoNuevo.setGrupoProducto(grupoProducto.get());
+
+        productoDAO.save(productoNuevo);
+
+        return productoNuevo;
     }
 }
 

@@ -3,6 +3,7 @@ package com.example.freezer.controller;
 import java.util.List;
 
 import com.example.freezer.dto.CargaTemperaturaRequest;
+import com.example.freezer.dto.ProductoRequest;
 import com.example.freezer.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +55,12 @@ public class ProductoController {
         productoService.registrarTemperaturasByGrupo(cargaTemperaturaRequest);
 
         return ResponseEntity.ok("Registros cargados con exito");
+    }
+
+    @PostMapping("/nuevoProducto")
+    public ResponseEntity<Producto> cargarProducto(@RequestBody ProductoRequest productoRequest){
+        Producto producto = productoService.cargarProducto(productoRequest);
+
+        return ResponseEntity.ok(producto);
     }
 }
