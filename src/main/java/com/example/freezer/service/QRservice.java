@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class QRservice {
 
-    private static final String BASE_URL = "https://freezerappdeploy.vercel.app/informacion/";
+    private static final String BASE_URL = "https://freezer-client.vercel.app/productos/";
+
 
     public String generarCodigoQR(Long productoId) throws Exception {
         String url = BASE_URL + productoId;
