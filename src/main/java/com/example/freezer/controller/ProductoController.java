@@ -94,4 +94,11 @@ public class ProductoController {
         return ResponseEntity.ok(grupoCreado);
     }
 
+    @GetMapping("/grupo/{id}")
+    public ResponseEntity<List<GrupoProducto>> getGruposByOrganizacion(@PathVariable Long id){
+        List<GrupoProducto> grupos = productoService.getGruposByOrganizacion(id);
+
+        return ResponseEntity.ok(grupos);
+    }
+
 }

@@ -160,5 +160,22 @@ public class ProductoService {
 
         return nuevoGrupo;
     }
+
+    public List<GrupoProducto> getGruposByOrganizacion(Long id) {
+        //Obtener todos los grupos de la organizacion
+        Optional<Organizacion> organizacion = organizacionDAO.findById(id);
+
+        if (organizacion.isEmpty()){
+            throw new RuntimeException();
+        }
+
+        List<Locacion> locaciones = locacionDAO.findAllByOrganizacion(organizacion.get());
+        List<GrupoProducto> grupos = new ArrayList<>();
+        for (Locacion locacion : locaciones){
+            grupos.addAll(grupoProductoDAO.findGrupoProductoByLocacion(locacion));
+        }
+
+        return grupos;
+    }
 }
 
