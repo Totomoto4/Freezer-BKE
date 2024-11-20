@@ -5,7 +5,9 @@ import com.example.freezer.dto.RegisterRequest;
 import com.example.freezer.exception.AuthenticationException;
 import com.example.freezer.dto.LoginRequest;
 import com.example.freezer.exception.RegisterException;
+import com.example.freezer.model.Locacion;
 import com.example.freezer.service.EmpleadoService;
+import com.example.freezer.service.LocacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,9 @@ public class EmpleadosController {
 
     @Autowired
     private EmpleadoService empleadoService;
+
+    @Autowired
+    private LocacionService locacionService;
 
     @PostMapping("/auth")
     public ResponseEntity<EmpleadoDTO> login(@RequestBody LoginRequest loginRequest) throws AuthenticationException {
@@ -58,5 +63,11 @@ public class EmpleadosController {
         return empleadoActualizado
                 .map(ResponseEntity::ok) // 200 OK con el empleado actualizado
                 .orElseGet(() -> ResponseEntity.notFound().build()); // 404 Not Found si el empleado no existe
+    }
+
+    @GetMapping("/locaciones/{id}")
+    public ResponseEntity<List<Locacion>> obtenerLocaciones(@PathVariable int id) {
+
+        return ResponseEntity.ok(locacionService.getLocacionByOrganizacion((long) id));
     }
 }
