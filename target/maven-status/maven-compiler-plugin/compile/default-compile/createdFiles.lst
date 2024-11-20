@@ -10,6 +10,7 @@ com\example\freezer\dto\LoginRequest.class
 com\example\freezer\model\Empleado$TipoEmpleado.class
 com\example\freezer\model\RegistroTemperatura.class
 com\example\freezer\dao\GrupoProductoDAO.class
+com\example\freezer\service\LocacionService.class
 com\example\freezer\service\QRservice.class
 com\example\freezer\FreezerApplication.class
 com\example\freezer\dao\EmpleadoDAO.class
