@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class QRservice {
 
-    private static final String BASE_URL = "https://freezer-client.vercel.app/productos/";
+    private static final String BASE_URL = "https://vercel-test-client-kohl.vercel.app/producto/";
 
 
     public String generarCodigoQR(Long productoId) throws Exception {
@@ -34,7 +34,7 @@ public class QRservice {
     public static void main(String[] args) throws Exception {
         QRservice qRservice = new QRservice();
 
-        String codigoPrueba = qRservice.generarCodigoQR(1L);
+        String codigoPrueba = qRservice.generarCodigoQR(3L);
         System.out.println(codigoPrueba);
     }
     

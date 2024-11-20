@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.freezer.dto.CargaTemperaturaRequest;
+import com.example.freezer.dto.GrupoProductoRequest;
 import com.example.freezer.dto.ProductoRequest;
+import com.example.freezer.model.GrupoProducto;
 import com.example.freezer.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -85,5 +87,11 @@ public class ProductoController {
                 .orElseGet(() -> ResponseEntity.notFound().build()); // 404 Not Found si el producto no existe
     }
 
+    @PostMapping("/grupo")
+    public ResponseEntity<GrupoProducto> crearGrupoProducto(@RequestBody GrupoProductoRequest grupoProductoRequest){
+        GrupoProducto grupoCreado = productoService.cargarGrupoProducto(grupoProductoRequest);
+
+        return ResponseEntity.ok(grupoCreado);
+    }
 
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.example.freezer.dao.*;
 import com.example.freezer.dto.CargaTemperaturaRequest;
+import com.example.freezer.dto.GrupoProductoRequest;
 import com.example.freezer.dto.ProductoRequest;
 import com.example.freezer.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,23 @@ public class ProductoService {
         }
 
         return Optional.empty();
+    }
+
+    public GrupoProducto cargarGrupoProducto(GrupoProductoRequest grupoProductoRequest) {
+
+        Optional<Locacion> locacion = locacionDAO.findById(grupoProductoRequest.getLocacionID());
+
+        if(locacion.isEmpty()){
+            throw new RuntimeException("No se encontro la locacion");
+        }
+
+        GrupoProducto nuevoGrupo = new GrupoProducto();
+        nuevoGrupo.setNombre(grupoProductoRequest.getNombre());
+        nuevoGrupo.setLocacion(locacion.get());
+
+        grupoProductoDAO.save(nuevoGrupo);
+
+        return nuevoGrupo;
     }
 }
 

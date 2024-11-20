@@ -4,6 +4,7 @@ com\example\freezer\dto\ProductoRequest.class
 com\example\freezer\dto\RegisterRequest.class
 com\example\freezer\controller\GlobalExceptionHandler.class
 com\example\freezer\dto\EmpleadoDTO.class
+com\example\freezer\dto\GrupoProductoRequest.class
 com\example\freezer\controller\ProductoController.class
 com\example\freezer\dto\LoginRequest.class
 com\example\freezer\model\Empleado$TipoEmpleado.class
