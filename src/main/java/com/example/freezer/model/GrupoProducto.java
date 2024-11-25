@@ -29,7 +29,7 @@ public class GrupoProducto {
     private CategoriaAlmacenamiento categoria;
 
     @Getter
-    private enum CategoriaAlmacenamiento {
+    public enum CategoriaAlmacenamiento {
         CONGELADO(-18.0),
         REFRIGERADO(4.0);
 

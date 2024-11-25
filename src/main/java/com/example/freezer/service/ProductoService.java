@@ -164,6 +164,7 @@ public class ProductoService {
         GrupoProducto nuevoGrupo = new GrupoProducto();
         nuevoGrupo.setNombre(grupoProductoRequest.getNombre());
         nuevoGrupo.setLocacion(locacion.get());
+        nuevoGrupo.setCategoria(GrupoProducto.CategoriaAlmacenamiento.valueOf(grupoProductoRequest.getCategoria().toUpperCase()));
 
         grupoProductoDAO.save(nuevoGrupo);
 
