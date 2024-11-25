@@ -19,6 +19,7 @@ com\example\freezer\exception\RegisterException.class
 com\example\freezer\exception\AuthenticationException.class
 com\example\freezer\dao\RegistroTemperaturaDAO.class
 com\example\freezer\dao\ProductoDAO.class
+com\example\freezer\model\GrupoProducto$CategoriaAlmacenamiento.class
 com\example\freezer\model\Locacion.class
 com\example\freezer\model\Organizacion.class
 com\example\freezer\config\CorsConfig$1.class
@@ -27,7 +28,6 @@ com\example\freezer\model\Empleado.class
 com\example\freezer\config\CorsConfig.class
 com\example\freezer\dao\OrganizacionDAO.class
 com\example\freezer\dao\LocacionDAO.class
-com\example\freezer\model\Categoria.class
 com\example\freezer\controller\EmpleadosController.class
 com\example\freezer\service\ProductoService.class
 com\example\freezer\model\GrupoProducto.class

@@ -56,13 +56,17 @@ public class ProductoService {
         }
 
         List<Producto> productosDeLaOrganizacion = new ArrayList<>();
-        for (GrupoProducto grupo : grupos){
-            productosDeLaOrganizacion.addAll(productoDAO.findProductosByGrupoProducto(grupo));
+        for (GrupoProducto grupo : grupos) {
+            List<Producto> productos = productoDAO.findProductosByGrupoProducto(grupo);
+
+            // Filtrar solo productos activos
+            for (Producto producto : productos) {
+                if (producto.isActivo()) {
+                    productosDeLaOrganizacion.add(producto);
+                }
+            }
         }
 
-        for (Producto producto : productosDeLaOrganizacion){
-            System.out.println(producto.getGrupoProducto().toString());
-        }
         return productosDeLaOrganizacion;
     }
 
@@ -110,6 +114,7 @@ public class ProductoService {
         }
 
         Producto productoNuevo = new Producto();
+        productoNuevo.setActivo(true);
         productoNuevo.setNombre(productoRequest.getNombre());
         productoNuevo.setGrupoProducto(grupoProducto.get());
 
@@ -122,7 +127,11 @@ public class ProductoService {
         Optional<Producto> producto = productoDAO.findById(id);
 
         if (producto.isPresent()) {
-            productoDAO.delete(producto.get());
+            Producto p = producto.get();
+            p.setActivo(false);  // Cambia el estado de "activo" a false
+            productoDAO.save(p);  // Guarda el producto actualizado
+
+            System.out.println("Eliminando producto");
             return true;
         }
         return false;

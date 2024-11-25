@@ -18,12 +18,28 @@ public class GrupoProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name = "id_local", nullable = false)
     private Locacion locacion;
 
     private String nombre;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CategoriaAlmacenamiento categoria;
+
+    @Getter
+    private enum CategoriaAlmacenamiento {
+        CONGELADO(-18.0),
+        REFRIGERADO(4.0);
+
+        private final double temperaturaMaxima;
+
+        CategoriaAlmacenamiento(double temperaturaMaxima) {
+            this.temperaturaMaxima = temperaturaMaxima;
+        }
+
+    }
 
 }
 
